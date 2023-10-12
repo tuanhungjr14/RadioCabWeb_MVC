@@ -2,7 +2,7 @@
 
 namespace RadioCab.Controllers
 {
-    public class RadioCabsController : Controller
+    public class DriversController : Controller
     {
         public IActionResult Index()
         {

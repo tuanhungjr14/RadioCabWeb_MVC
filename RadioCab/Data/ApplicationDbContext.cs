@@ -9,6 +9,15 @@ namespace RadioCab.Data
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Driver>().HasData(
+                new Driver { DriverId = 1, DriverName = "Action", DriverAddress = "HN",DriverPass="1",DriverDescripts="a",City="HN",Mobile="123456789",Email="a@gmail.com",Telephone="028432052",Experience=100},
+                new Driver { DriverId = 2, DriverName = "SciFi", DriverAddress = "HN", DriverPass = "1", DriverDescripts = "a", City = "HN", Mobile = "123456789", Email = "a@gmail.com", Telephone = "028432052", Experience = 100 },
+                new Driver { DriverId = 3, DriverName = "Histoty", DriverAddress = "HN", DriverPass = "1", DriverDescripts = "a", City = "HN", Mobile = "123456789", Email = "a@gmail.com", Telephone = "028432052", Experience = 100 }
+                );
+
+        }
 
         public DbSet<Admin> Admins { get; set; }
         public DbSet<CabCompany> CabCompanies { get; set; }
