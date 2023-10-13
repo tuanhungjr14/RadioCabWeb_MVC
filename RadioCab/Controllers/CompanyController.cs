@@ -1,22 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RadioCab.Data;
-using RadioCab.Models;
 
 namespace RadioCab.Controllers
 {
-    public class DriversController : Controller
+    public class CompanyController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public DriversController(ApplicationDbContext db)
+        public CompanyController(ApplicationDbContext db)
         {
             _db = db;
         }
-        public IActionResult Details()
+        public IActionResult Registration()
         {
-            List<Driver> objDriverList = _db.Drivers.ToList(); ;
             return View();
         }
-        public IActionResult Registration()
+        public IActionResult Details()
         {
             return View();
         }

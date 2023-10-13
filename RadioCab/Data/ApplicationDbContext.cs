@@ -12,9 +12,9 @@ namespace RadioCab.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Driver>().HasData(
-                new Driver { DriverId = 1, DriverName = "Action", DriverAddress = "HN",DriverPass="1",DriverDescripts="a",City="HN",Mobile="123456789",Email="a@gmail.com",Telephone="028432052",Experience=100},
-                new Driver { DriverId = 2, DriverName = "SciFi", DriverAddress = "HN", DriverPass = "1", DriverDescripts = "a", City = "HN", Mobile = "123456789", Email = "a@gmail.com", Telephone = "028432052", Experience = 100 },
-                new Driver { DriverId = 3, DriverName = "Histoty", DriverAddress = "HN", DriverPass = "1", DriverDescripts = "a", City = "HN", Mobile = "123456789", Email = "a@gmail.com", Telephone = "028432052", Experience = 100 }
+                new Driver { DriverId = 1, DriverName = "A", DriverAddress = "HN",DriverPass="1",DriverDescripts="a",City="HN",Mobile="123456789",Email="a@gmail.com",Telephone="0284320523",Experience=100},
+                new Driver { DriverId = 2, DriverName = "B", DriverAddress = "HN", DriverPass = "1", DriverDescripts = "a", City = "HN", Mobile = "123456788", Email = "b@gmail.com", Telephone = "0284320524", Experience = 100 },
+                new Driver { DriverId = 3, DriverName = "C", DriverAddress = "HN", DriverPass = "1", DriverDescripts = "a", City = "HN", Mobile = "123456787", Email = "c@gmail.com", Telephone = "0284320525", Experience = 100 }
                 );
 
         }
@@ -23,7 +23,7 @@ namespace RadioCab.Data
         public DbSet<CabCompany> CabCompanies { get; set; }
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Advertisment> Advertisments { get; set; }
-        public DbSet<FeedbackType> feedbackTypes { get; set; }
+        public DbSet<FeedbackType> FeedbackTypes { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<Pricing> Pricings { get; set; }
         public DbSet<CabOrder> CabOrders { get; set; }

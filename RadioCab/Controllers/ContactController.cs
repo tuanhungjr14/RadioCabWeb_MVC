@@ -2,7 +2,7 @@
 
 namespace RadioCab.Controllers
 {
-    public class AdvertismentController : Controller
+    public class ContactController : Controller
     {
         public IActionResult Index()
         {
