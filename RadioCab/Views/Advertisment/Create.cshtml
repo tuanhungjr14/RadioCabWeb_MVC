@@ -1,0 +1,89 @@
+﻿@model Advertisment
+<div class=" card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Create Advertisiment</h2>
+
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+
+            <div class="border p-3 ">
+                @* <div asp-validation-summary="ModelOnly"></div>*@
+                
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="AdTilte" class="form-control border-0 shadow">
+                    <label asp-for="AdTilte" class="ms-2">Title</label>
+                    <span asp-validation-for="AdTilte" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="CompanyId" class="form-control border-0 shadow">
+                    <label asp-for="CompanyId" class="ms-2">Company ID</label>
+                    <span asp-validation-for="CompanyId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="CompanyName" class="form-control border-0 shadow">
+                    <label asp-for="CompanyName" class="ms-2">Company Name</label>
+                    <span asp-validation-for="CompanyName" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Designation" class="form-control border-0 shadow">
+                    <label asp-for="Designation" class="ms-2">Designation</label>
+                    <span asp-validation-for="Designation" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="AdAddress" class="form-control border-0 shadow">
+                    <label asp-for="AdAddress" class="ms-2">Address</label>
+                    <span asp-validation-for="AdAddress" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Mobile" class="form-control border-0 shadow">
+                    <label asp-for="Mobile" class="ms-2">Mobile</label>
+                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Telephone" class="form-control border-0 shadow">
+                    <label asp-for="Telephone" class="ms-2">Telephone</label>
+                    <span asp-validation-for="Telephone" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Fax" class="form-control border-0 shadow">
+                    <label asp-for="Fax" class="ms-2">Fax</label>
+                    <span asp-validation-for="Fax" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Email" class="form-control border-0 shadow">
+                    <label asp-for="Email" class="ms-2">Email</label>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="AdDescript" class="form-control border-0 shadow">
+                    <label asp-for="AdDescript" class="ms-2">Description</label>
+                    <span asp-validation-for="AdDescript" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Create</button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Advertisment" asp-action="Index" class="btn btn-outline-primary border form-control">
+                            Back to list
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

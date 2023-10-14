@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RadioCab.Data;
+using RadioCab.Models;
 
 namespace RadioCab.Controllers
 {
@@ -18,5 +19,6 @@ namespace RadioCab.Controllers
         {
             return View();
         }
+        
     }
 }

@@ -49,6 +49,7 @@ namespace RadioCab.Models
         public int AdId { get; set; }
         [ForeignKey("CabCompany")]
         public int CompanyId { get; set; }
+        public string AdTilte { get; set; }
         public string CompanyName { get; set; }
         public string Designation { get; set; }
         public string AdAddress { get; set; }

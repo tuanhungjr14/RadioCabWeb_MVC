@@ -16,6 +16,7 @@ namespace RadioCab.Data
                 new Driver { DriverId = 2, DriverName = "B", DriverAddress = "HN", DriverPass = "1", DriverDescripts = "a", City = "HN", Mobile = "123456788", Email = "b@gmail.com", Telephone = "0284320524", Experience = 100 },
                 new Driver { DriverId = 3, DriverName = "C", DriverAddress = "HN", DriverPass = "1", DriverDescripts = "a", City = "HN", Mobile = "123456787", Email = "c@gmail.com", Telephone = "0284320525", Experience = 100 }
                 );
+           
 
         }
 

@@ -41,7 +41,7 @@ namespace RadioCab.Migrations
 
                     b.HasKey("AorderId");
 
-                    b.ToTable("AdOrders");
+                    b.ToTable("AdOrders", (string)null);
                 });
 
             modelBuilder.Entity("RadioCab.Models.Admin", b =>
@@ -70,7 +70,7 @@ namespace RadioCab.Migrations
 
                     b.HasKey("AdminId");
 
-                    b.ToTable("Admins");
+                    b.ToTable("Admins", (string)null);
                 });
 
             modelBuilder.Entity("RadioCab.Models.Advertisment", b =>
@@ -118,7 +118,7 @@ namespace RadioCab.Migrations
 
                     b.HasKey("AdId");
 
-                    b.ToTable("Advertisments");
+                    b.ToTable("Advertisments", (string)null);
                 });
 
             modelBuilder.Entity("RadioCab.Models.CabCompany", b =>
@@ -167,7 +167,7 @@ namespace RadioCab.Migrations
 
                     b.HasKey("CompanyId");
 
-                    b.ToTable("CabCompanies");
+                    b.ToTable("CabCompanies", (string)null);
                 });
 
             modelBuilder.Entity("RadioCab.Models.CabOrder", b =>
@@ -190,7 +190,7 @@ namespace RadioCab.Migrations
 
                     b.HasKey("CorderId");
 
-                    b.ToTable("CabOrders");
+                    b.ToTable("CabOrders", (string)null);
                 });
 
             modelBuilder.Entity("RadioCab.Models.DriveOrder", b =>
@@ -213,7 +213,7 @@ namespace RadioCab.Migrations
 
                     b.HasKey("DorderId");
 
-                    b.ToTable("DriveOrders");
+                    b.ToTable("DriveOrders", (string)null);
                 });
 
             modelBuilder.Entity("RadioCab.Models.Driver", b =>
@@ -261,7 +261,7 @@ namespace RadioCab.Migrations
 
                     b.HasKey("DriverId");
 
-                    b.ToTable("Drivers");
+                    b.ToTable("Drivers", (string)null);
 
                     b.HasData(
                         new
@@ -339,7 +339,7 @@ namespace RadioCab.Migrations
 
                     b.HasKey("FeedbackId");
 
-                    b.ToTable("Feedbacks");
+                    b.ToTable("Feedbacks", (string)null);
                 });
 
             modelBuilder.Entity("RadioCab.Models.FeedbackType", b =>
@@ -356,7 +356,7 @@ namespace RadioCab.Migrations
 
                     b.HasKey("FeeId");
 
-                    b.ToTable("FeedbackTypes");
+                    b.ToTable("FeedbackTypes", (string)null);
                 });
 
             modelBuilder.Entity("RadioCab.Models.Pricing", b =>
@@ -376,7 +376,7 @@ namespace RadioCab.Migrations
 
                     b.HasKey("PriceId");
 
-                    b.ToTable("Pricings");
+                    b.ToTable("Pricings", (string)null);
                 });
 #pragma warning restore 612, 618
         }

@@ -14,7 +14,7 @@ namespace RadioCab.Controllers
         public IActionResult Details()
         {
             List<Driver> objDriverList = _db.Drivers.ToList(); ;
-            return View();
+            return View(objDriverList);
         }
         public IActionResult Registration()
         {

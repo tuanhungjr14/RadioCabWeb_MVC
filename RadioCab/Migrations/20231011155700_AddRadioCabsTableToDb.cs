@@ -55,7 +55,8 @@ namespace RadioCab.Migrations
                     Telephone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Fax = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AdDescript = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AdDescript = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AdTiltle = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -153,7 +154,7 @@ namespace RadioCab.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "feedbackTypes",
+                name: "FeedbackTypes",
                 columns: table => new
                 {
                     FeeId = table.Column<int>(type: "int", nullable: false)
@@ -162,7 +163,7 @@ namespace RadioCab.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_feedbackTypes", x => x.FeeId);
+                    table.PrimaryKey("PK_FeedbackTypes", x => x.FeeId);
                 });
 
             migrationBuilder.CreateTable(
