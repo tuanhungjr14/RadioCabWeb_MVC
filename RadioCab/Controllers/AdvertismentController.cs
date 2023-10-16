@@ -23,9 +23,13 @@ namespace RadioCab.Controllers
         [HttpPost]
         public IActionResult Create(Advertisment obj)
         {
-            _db.Advertisments.Add(obj);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            if(ModelState.IsValid)
+            { 
+                _db.Advertisments.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }

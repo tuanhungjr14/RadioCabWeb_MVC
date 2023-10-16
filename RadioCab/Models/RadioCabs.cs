@@ -3,6 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RadioCab.Models
 {
+    public enum MembershipType
+    {
+        Basic,
+        Premium,
+        Free
+    }
 
     public class Admin
     {
