@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using RadioCab.Data;
+
+using RadioCab.DataAccess.Data;
 using RadioCab.Models;
 
 namespace RadioCab.Controllers

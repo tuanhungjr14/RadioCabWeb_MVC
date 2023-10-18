@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RadioCab.Data;
+using RadioCab.DataAccess.Data;
 
 #nullable disable
 
-namespace RadioCab.Migrations
+namespace RadioCab.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20231011155700_AddRadioCabsTableToDb")]

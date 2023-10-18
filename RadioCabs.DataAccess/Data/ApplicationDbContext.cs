@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RadioCab.Models;
 
-namespace RadioCab.Data
+namespace RadioCab.DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {

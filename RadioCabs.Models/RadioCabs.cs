@@ -70,7 +70,7 @@ namespace RadioCab.Models
         [Key]
         public int FeeId { get; set; }
         public string FeeName { get; set; }
-        
+
     }
     public class Feedback
     {
@@ -91,7 +91,7 @@ namespace RadioCab.Models
         public string Category { get; set; }
         public int Price { get; set; }
     }
-    public  class CabOrder
+    public class CabOrder
     {
         [Key]
         public int CorderId { get; set; }
@@ -100,7 +100,7 @@ namespace RadioCab.Models
         [ForeignKey("Pricing")]
         public int Price { get; set; }
         public string PaymentMethod { get; set; }
-        
+
 
     }
     public class DriveOrder
@@ -118,7 +118,7 @@ namespace RadioCab.Models
     public class AdOrder
     {
         [Key]
-        
+
         public int AorderId { get; set; }
         [ForeignKey("Advertisment")]
         public int AdId { get; set; }

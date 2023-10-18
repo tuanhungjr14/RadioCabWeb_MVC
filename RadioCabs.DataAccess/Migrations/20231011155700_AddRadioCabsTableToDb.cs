@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace RadioCab.Migrations
+namespace RadioCab.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class AddRadioCabsTableToDb : Migration
