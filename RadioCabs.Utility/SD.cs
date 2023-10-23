@@ -8,5 +8,8 @@ namespace RadioCabs.Utility
 {
     public static class SD
     {
+        
+        public const string Role_Driver = "Driver";
+        public const string Role_Company = "Company";
     }
 }

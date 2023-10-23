@@ -19,6 +19,7 @@
             </a>
         </div>
     </div>
+    <div class="table-responsive">
 <table class="table">
     <thead>
         <tr>
@@ -88,12 +89,22 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AdDescript)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AdId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AdId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AdId">Delete</a>
-            </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.AdId" class="btn btn-warning">
+                                <i class="bi bi-pencil"></i> Edit
+                            </a>
+                            |
+                            <a asp-action="Details" asp-route-id="@item.AdId" class="btn btn-info">
+                                <i class="bi bi-info-circle"></i> Details
+                            </a>
+                            |
+                            <a asp-action="Delete" asp-route-id="@item.AdId" class="btn btn-danger">
+                                <i class="bi bi-trash"></i> Delete
+                            </a>
+                        </td>
+
         </tr>
 }
     </tbody>
 </table>
+    </div>
