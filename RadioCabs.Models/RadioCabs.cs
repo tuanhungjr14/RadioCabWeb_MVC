@@ -72,6 +72,8 @@ namespace RadioCab.Models
         public string FeeName { get; set; }
 
     }
+
+
     public class Feedback
     {
         public int FeedbackId { get; set; }
@@ -126,6 +128,13 @@ namespace RadioCab.Models
         public int Price { get; set; }
         public string PaymentMethod { get; set; }
 
+
+    }
+    public class Contact
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Mesage { get; set; }
 
     }
 }
