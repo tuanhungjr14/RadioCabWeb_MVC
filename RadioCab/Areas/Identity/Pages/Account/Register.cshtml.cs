@@ -109,25 +109,30 @@ namespace RadioCab.Areas.Identity.Pages.Account
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
         }
-        
+
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if(!_roleManager.RoleExistsAsync(SD.Role_Driver).GetAwaiter().GetResult()) {
-                
+            if (!_roleManager.RoleExistsAsync(SD.Role_Driver).GetAwaiter().GetResult())
+            {
+
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Driver)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(SD.Role_Company)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
 
             }
             Input = new()
             {
-                RoleList = _roleManager.Roles.Select(x => x.Name).Select(i => new SelectListItem
-                {
-                    Text = i,
-                    Value = i
-                })
+                RoleList = _roleManager.Roles
+            .Where(role => role.Name == SD.Role_Company || role.Name == SD.Role_Driver)
+            .Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Name
+            })
             };
+
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -139,7 +144,7 @@ namespace RadioCab.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
-               
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -148,6 +153,14 @@ namespace RadioCab.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    if(!string.IsNullOrEmpty(Input.Role)) {
+                        await _userManager.AddToRoleAsync(user, Input.Role);
+
+                    }
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user,SD.Role_Driver);
+                    }
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

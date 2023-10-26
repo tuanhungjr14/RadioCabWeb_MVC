@@ -11,5 +11,6 @@ namespace RadioCabs.Utility
         
         public const string Role_Driver = "Driver";
         public const string Role_Company = "Company";
+        public const string Role_Admin = "Admin";
     }
 }
