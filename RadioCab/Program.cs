@@ -3,8 +3,7 @@ using RadioCab.DataAccess.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using RadioCab.Utility;
-using Microsoft.Extensions.DependencyInjection;
-using RadioCab.Data;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,8 +14,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 
 builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 builder.Services.AddRazorPages();
-builder.Services.AddDbContext<RadioCabContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("RadioCabContext") ?? throw new InvalidOperationException("Connection string 'RadioCabContext' not found.")));
+
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 var app = builder.Build();
 
@@ -29,7 +27,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+
 app.UseStaticFiles();
 
 app.UseRouting();
