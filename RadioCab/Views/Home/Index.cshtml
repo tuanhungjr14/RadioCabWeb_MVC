@@ -1,8 +1,167 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4" , style="font-weight: bold">Welcome to RadioCabs</h1>
+
 </div>
+
+
+<div class="slideshow-container">
+    <div class="slide">
+        <img src="~/img/go.jpeg" alt="Image 1">
+    </div>
+    <div class="slide">
+        <img src="~/img/taxi.jpeg" alt="Image 2">
+    </div>
+    <div class="slide">
+        <img src="~/img/hi.jpg" alt="Image 3">
+    </div>
+</div>
+
+
+
+<div class="flex-container">
+    <div style="flex: 1;">
+        <h2>What is a RadioCabs</h2>
+        <h3 style="text-align: justify; font-weight: normal">
+            RadioCabs.in is a comprehensive online directory dedicated to providing information about Radio Taxi companies and their services in ABC (place) as well as major cities across the country. With the help of this platform, you can effortlessly access all the information you need about Radio Taxi Rental Services and the companies that cater to your needs in ABC (place). RadioCabs.in, with its city-wise listing of top Radio Taxi operators, ensures that you experience the best cab service, offering safety, cost-effectiveness, and highly personalized world-class transport around the clock. We provide listings of Radio Cab companies from all over India. RadioCabs.in offers three different types of memberships - Premium, Basic, and Free.
+        </h3>
+    </div>
+    <div style="flex: 1;">
+        <img src="~/img/meme.jpeg" alt="hinh anh minh hoa">
+    </div>
+</div>
+
+
+
+<div class="service">
+    <h1>Service</h1>
+</div>
+
+
+
+<div class="flex-center">
+
+
+    <div style="flex: 2;">
+        <h2 style="text-align:center">Taxi</h2>
+        <br>
+        <img src="~/img/taxiservice.jpg" alt="taxi">
+        <h3 style="text-align: justify; font-weight: normal">
+            We offer a range of taxi models from mid-range to premium, along with corresponding tailored services. Additionally, we provide different membership levels (Premium, Basic, Free) to receive appropriate benefits based on the tier.
+        </h3>
+    </div>
+    <div style="flex: 2;">
+        <img src="" alt="hinh anh minh hoa">
+    </div>
+
+    <div style="flex: 2;">
+
+        <p>Lorem ákdnashduagsydgasgdhagsuhhagsdyagshdasdagsdasdasd</p>
+
+    </div>
+</div>
+
+
+
+<style>
+    .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+        padding-bottom: 100px
+    }
+
+    .slide {
+        display: none;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -22px;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        background: rgba(0, 0, 0, 0.5);
+    }
+
+    .prev {
+        left: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .next {
+        right: 0;
+        border-radius: 0 3px 3px 0;
+    }
+
+
+
+    .flex-container {
+        display: flex;
+        background-color: white;
+        color: black;
+    }
+
+        .flex-container > div {
+            margin: 10px;
+            padding: 100px;
+            font-size: 30px;
+        }
+
+
+    .flex-center {
+        display: flex;
+        background-color: lightgrey;
+        color: black;
+    }
+
+        .flex-center > div {
+            margin: 10px;
+            padding: 100px;
+            font-size: 30px;
+        }
+
+    .service {
+        font-weight: bold;
+        ;
+        text-align: center;
+        background: lightgrey;
+        color: black;
+    }
+
+</style>
+
+
+<script>
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let slides = document.getElementsByClassName("slide");
+
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+
+        slideIndex++;
+
+        if (slideIndex > slides.length) {
+            slideIndex = 1;
+        }
+
+        slides[slideIndex - 1].style.display = "block";
+
+        setTimeout(showSlides, 3000);
+    }
+</script>
