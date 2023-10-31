@@ -31,10 +31,11 @@ namespace RadioCab.DataAccess.Data
         public DbSet<Advertisment> Advertisments { get; set; }
         public DbSet<FeedbackType> FeedbackTypes { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
-        public DbSet<Pricing> Pricings { get; set; }
+        public DbSet<Pricings> Pricings { get; set; }
         public DbSet<CabOrder> CabOrders { get; set; }
         public DbSet<DriveOrder> DriveOrders { get; set; }
         public DbSet<AdOrder> AdOrders { get; set; }
+        public DbSet<ContactModel> Contact { get; set; }
 
 
     }

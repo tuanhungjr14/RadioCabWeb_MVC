@@ -1,24 +1,25 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿@model ContactModel
+@{
+    ViewData["Title"] = "Contact";
 }
 
 <div class="container mt-5">
     <h2>Contact Us</h2>
     <p>If you have any questions or feedback, please feel free to contact us.</p>
 
-    <form>
+    <form asp-action="SubmitContact" method="post">
         <div class="mb-3">
-            <label for="name" class="form-label">Your Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Your Name">
+            <label for="Name" class="form-label">Your Name</label>
+            <input asp-for="Name" class="form-control" id="Name" placeholder="Your Name">
         </div>
         <div class="mb-3">
-            <label for="email" class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="email" placeholder="Your Email">
+            <label for="Email" class="form-label">Email Address</label>
+            <input asp-for="Email" class="form-control" id="Email" placeholder="Your Email">
         </div>
         <div class="mb-3">
-            <label for="message" class="form-label">Message</label>
-            <textarea class="form-control" id="message" rows="5" placeholder="Your Message"></textarea>
+            <label for="Message" class="form-label">Message</label>
+            <textarea asp-for="Message" class="form-control" id="Message" rows="5" placeholder="Your Message"></textarea>
         </div>
-        <button type="submit"  asp-action="Submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

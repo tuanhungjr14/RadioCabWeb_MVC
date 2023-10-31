@@ -1,4 +1,5 @@
-﻿
+﻿@using RadioCabs.Utility;
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,17 +24,14 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="Customers" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Company/Services
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-controller="CabCompany" asp-action="Create">Registration</a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
+                                
                                 <li class="nav-item">
                                     <a class="dropdown-item" asp-controller="Company" asp-action="Details">Details</a>
                                 </li>
@@ -44,22 +42,23 @@
                                 Drivers
                             </a>
                             <ul class="dropdown-menu">
+                                
                                 <li class="nav-item">
-                                    <a class="dropdown-item" asp-controller="Drivers1" asp-action="Index">Registration</a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-controller="Drivers1" asp-action="Details">Details</a>
+                                    <a class="dropdown-item" asp-controller="Drivers" asp-action="Details">Details</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Feedback" asp-action="Index">Feedback</a>
                         </li>
+                        @if (User.IsInRole(SD.Role_Company) || User.IsInRole(SD.Role_Admin))
+                        {
+                            
                        
                         <li class="nav-item">
-                            <a class="nav-link" asp-controller="Feedback" asp-action="Index">Advertisment</a>
-                        </li>
+                            <a class="nav-link" asp-area="Company" asp-controller="Advertisments" asp-action="Index">Advertisment</a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link" asp-controller="Contact" asp-action="Index">Contact</a>
                         </li>

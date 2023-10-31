@@ -64,6 +64,7 @@ namespace RadioCab.Models
         public string Fax { get; set; }
         public string Email { get; set; }
         public string AdDescript { get; set; }
+        public string ImageUrl { get; set; }
     }
     public class FeedbackType
     {
@@ -77,15 +78,31 @@ namespace RadioCab.Models
     public class Feedback
     {
         public int FeedbackId { get; set; }
+
+        [Required(ErrorMessage = "Name is required")]
         public string FullName { get; set; }
+
+        [Required(ErrorMessage = "Mobile number is required")]
+        [MaxLength(15, ErrorMessage = "Mobile number cannot exceed 15 characters")]
         public string Mobile { get; set; }
+
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "City is required")]
         public string City { get; set; }
+
+        [Required(ErrorMessage = "Feedback type is required")]
         [ForeignKey("FeedbackType")]
         public string FeedbackType { get; set; }
+
+        [Required(ErrorMessage = "Feedback description is required")]
+        [MaxLength(500, ErrorMessage = "Feedback description cannot exceed 500 characters")]
         public string FeedDescript { get; set; }
     }
-    public class Pricing
+
+    public class Pricings
 
     {
         [Key]
@@ -99,7 +116,7 @@ namespace RadioCab.Models
         public int CorderId { get; set; }
         [ForeignKey("CabCompany")]
         public int CabId { get; set; }
-        [ForeignKey("Pricing")]
+        [ForeignKey("Pricings")]
         public int Price { get; set; }
         public string PaymentMethod { get; set; }
 
@@ -111,7 +128,7 @@ namespace RadioCab.Models
         public int DorderId { get; set; }
         [ForeignKey("Driver")]
         public int DriverId { get; set; }
-        [ForeignKey("Pricing")]
+        [ForeignKey("Pricings")]
         public int Price { get; set; }
         public string PaymentMethod { get; set; }
 
@@ -124,17 +141,10 @@ namespace RadioCab.Models
         public int AorderId { get; set; }
         [ForeignKey("Advertisment")]
         public int AdId { get; set; }
-        [ForeignKey("Pricing")]
+        [ForeignKey("Pricings")]
         public int Price { get; set; }
         public string PaymentMethod { get; set; }
 
-
-    }
-    public class Contact
-    {
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Mesage { get; set; }
 
     }
 }

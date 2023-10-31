@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RadioCab.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using RadioCab.DataAccess.Data;
 namespace RadioCab.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231030150638_UpdateToTable")]
+    partial class UpdateToTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -319,10 +322,6 @@ namespace RadioCab.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Mobile")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -406,32 +405,6 @@ namespace RadioCab.DataAccess.Migrations
                     b.HasKey("CorderId");
 
                     b.ToTable("CabOrders");
-                });
-
-            modelBuilder.Entity("RadioCab.Models.ContactModel", b =>
-                {
-                    b.Property<int>("ContactId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactId"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ContactId");
-
-                    b.ToTable("Contact");
                 });
 
             modelBuilder.Entity("RadioCab.Models.DriveOrder", b =>
@@ -564,8 +537,7 @@ namespace RadioCab.DataAccess.Migrations
 
                     b.Property<string>("FeedDescript")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FeedbackType")
                         .IsRequired()
@@ -577,8 +549,7 @@ namespace RadioCab.DataAccess.Migrations
 
                     b.Property<string>("Mobile")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("FeedbackId");
 
@@ -602,7 +573,7 @@ namespace RadioCab.DataAccess.Migrations
                     b.ToTable("FeedbackTypes");
                 });
 
-            modelBuilder.Entity("RadioCab.Models.Pricings", b =>
+            modelBuilder.Entity("RadioCab.Models.Pricing", b =>
                 {
                     b.Property<int>("PriceId")
                         .ValueGeneratedOnAdd()

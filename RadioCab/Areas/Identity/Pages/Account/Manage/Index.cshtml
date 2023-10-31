@@ -1,4 +1,5 @@
 ﻿@page
+@using RadioCabs.Utility;
 @model IndexModel
 @{
     ViewData["Title"] = "Profile";
@@ -16,10 +17,104 @@
                 <label asp-for="Username" class="form-label"></label>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
-                <label asp-for="Input.PhoneNumber" class="form-label"></label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                <input asp-for="CInput.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
+                <label asp-for="CInput.PhoneNumber" class="form-label"></label>
+                <span asp-validation-for="CInput.PhoneNumber" class="text-danger"></span>
             </div>
+            @if (User.IsInRole(SD.Role_Company)){
+            <div class="form-floating mb-3">
+                <input asp-for="CInput.CompanyName" class="form-control" placeholder="Please enter your company name." />
+                <label asp-for="CInput.CompanyName" class="form-label"></label>
+                <span asp-validation-for="CInput.CompanyName" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="CInput.ContactPerson" class="form-control" placeholder="Please enter the contact person." />
+                <label asp-for="CInput.ContactPerson" class="form-label"></label>
+                <span asp-validation-for="CInput.ContactPerson" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="CInput.DesignNation" class="form-control" placeholder="Please enter the designation." />
+                <label asp-for="CInput.DesignNation" class="form-label"></label>
+                <span asp-validation-for="CInput.DesignNation" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="CInput.CabAddress" class="form-control" placeholder="Please enter your address." />
+                <label asp-for="CInput.CabAddress" class="form-label"></label>
+                <span asp-validation-for="CInput.CabAddress" class="text-danger"></span>
+            </div>
+
+            
+
+            <div class="form-floating mb-3">
+                <input asp-for="CInput.Telephone" class="form-control" placeholder="Please enter your telephone number." />
+                <label asp-for="CInput.Telephone" class="form-label"></label>
+                <span asp-validation-for="CInput.Telephone" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="CInput.FaxNumber" class="form-control" placeholder="Please enter your fax number." />
+                <label asp-for="CInput.FaxNumber" class="form-label"></label>
+                <span asp-validation-for="CInput.FaxNumber" class="text-danger"></span>
+            </div>
+
+           
+
+            <div class="form-floating mb-3">
+                <input asp-for="CInput.MembershipType" class="form-control" placeholder="Please enter your membership type." />
+                <label asp-for="CInput.MembershipType" class="form-label"></label>
+                <span asp-validation-for="CInput.MembershipType" class="text-danger"></span>
+                </div>
+            } 
+            @if (User.IsInRole(SD.Role_Driver)){
+            <div class="form-floating mb-3">
+                <input asp-for="DInput.DriverName" class="form-control" placeholder="Please enter your company name." />
+                    <label asp-for="DInput.DriverName" class="form-label"></label>
+                    <span asp-validation-for="DInput.DriverName" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="DInput.DriverAddress" class="form-control" placeholder="Please enter the contact person." />
+                <label asp-for="DInput.DriverAddress" class="form-label"></label>
+                    <span asp-validation-for="DInput.DriverAddress" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="DInput.City" class="form-control" placeholder="Please enter the designation." />
+                    <label asp-for="DInput.City" class="form-label"></label>
+                    <span asp-validation-for="DInput.City" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="DInput.Mobile" class="form-control" placeholder="Please enter your address." />
+                    <label asp-for="DInput.Mobile" class="form-label"></label>
+                    <span asp-validation-for="DInput.Mobile" class="text-danger"></span>
+            </div>
+
+            
+
+            <div class="form-floating mb-3">
+                <input asp-for="DInput.Telephone" class="form-control" placeholder="Please enter your telephone number." />
+                    <label asp-for="DInput.Telephone" class="form-label"></label>
+                    <span asp-validation-for="DInput.Telephone" class="text-danger"></span>
+            </div>
+
+            <div class="form-floating mb-3">
+                    <input asp-for="DInput.Experience" class="form-control" placeholder="Please enter your fax number." />
+                    <label asp-for="DInput.Experience" class="form-label"></label>
+                    <span asp-validation-for="DInput.Experience" class="text-danger"></span>
+            </div>
+
+           
+
+            <div class="form-floating mb-3">
+                    <input asp-for="DInput.DriverDescripts" class="form-control" placeholder="Please enter your membership type." />
+                    <label asp-for="DInput.DriverDescripts" class="form-label"></label>
+                    <span asp-validation-for="DInput.DriverDescripts" class="text-danger"></span>
+                </div>
+            }
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
         </form>
     </div>

@@ -1,20 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RadioCab.DataAccess.Data;
 using RadioCab.Models;
 
 public class FeedbackController : Controller
 {
+    private readonly ApplicationDbContext _context;
+
+    public FeedbackController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
     public IActionResult Index()
     {
         return View();
     }
 
     [HttpPost]
-    public IActionResult SubmitFeedback(FeedbackModel model)
+    public IActionResult SubmitFeedback(Feedback model)
     {
         if (ModelState.IsValid)
         {
-            // Xử lý dữ liệu phản hồi ở đây (ví dụ: lưu vào cơ sở dữ liệu).
-            // Sau khi xử lý xong, bạn có thể chuyển hướng hoặc hiển thị một thông báo cảm ơn.
+            _context.Feedbacks.Add(model);
+            _context.SaveChanges();
 
             return RedirectToAction("ThankYou");
         }

@@ -1,4 +1,4 @@
-﻿@model FeedbackModel
+﻿@model Feedback
 @{
     ViewData["Title"] = "Feedback";
 }
@@ -7,14 +7,14 @@
 
 <form asp-action="SubmitFeedback" method="post">
     <div class="form-group">
-        <label for="Name">Name</label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <label for="FullName">Name</label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="MobileNumber">Mobile Number</label>
-        <input asp-for="MobileNumber" class="form-control" />
-        <span asp-validation-for="MobileNumber" class="text-danger"></span>
+        <label for="Mobile">Mobile Number</label>
+        <input asp-for="Mobile" class="form-control" />
+        <span asp-validation-for="Mobile" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label for="Email">Email</label>
@@ -27,18 +27,18 @@
         <span asp-validation-for="City" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="Type">Type</label>
-        <select asp-for="Type" class="form-control">
+        <label for="FeedbackType">Type</label>
+        <select asp-for="FeedbackType" class="form-control">
             <option value="Complaint">Complaint</option>
             <option value="Suggestion">Suggestion</option>
             <option value="Compliment">Compliment</option>
         </select>
-        <span asp-validation-for="Type" class="text-danger"></span>
+        <span asp-validation-for="FeedbackType" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label for="Description">Description</label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
+        <label for="FeedDescript">Description</label>
+        <textarea asp-for="FeedDescript" class="form-control"></textarea>
+        <span asp-validation-for="FeedDescript" class="text-danger"></span>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

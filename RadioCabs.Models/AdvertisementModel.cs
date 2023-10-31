@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,12 @@ namespace RadioCab.Models
 {
     public class AdvertisementModel
     {
+
+        [Key]
+        public int AdId { get; set; }
+        [ForeignKey("CabCompany")]
         public string CompanyName { get; set; }
+        public string AdTilte { get; set; }
         public string Designation { get; set; }
         public string Address { get; set; }
 
@@ -27,6 +33,7 @@ namespace RadioCab.Models
         public string Email { get; set; }
 
         public string Description { get; set; }
+        public string ImageUrl {  get; set; }
 
         [Required(ErrorMessage = "Payment Type is required.")]
         public string PaymentType { get; set; }

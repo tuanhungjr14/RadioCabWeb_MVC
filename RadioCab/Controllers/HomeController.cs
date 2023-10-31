@@ -2,8 +2,9 @@
 using RadioCab.Models;
 using System.Diagnostics;
 
-namespace RadioCab.Controllers
+namespace RadioCab.Areas.Customers.Controllers
 {
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

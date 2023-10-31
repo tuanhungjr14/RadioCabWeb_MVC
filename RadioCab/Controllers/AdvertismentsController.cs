@@ -10,6 +10,7 @@ using RadioCab.Models;
 
 namespace RadioCab.Controllers
 {
+    
     public class AdvertismentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -22,9 +23,9 @@ namespace RadioCab.Controllers
         // GET: Advertisments
         public async Task<IActionResult> Index()
         {
-              return _context.Advertisments != null ? 
-                          View(await _context.Advertisments.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Advertisments'  is null.");
+            return _context.Advertisments != null ?
+                        View(await _context.Advertisments.ToListAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Advertisments'  is null.");
         }
 
         // GET: Advertisments/Details/5
@@ -153,16 +154,16 @@ namespace RadioCab.Controllers
             {
                 _context.Advertisments.Remove(advertisment);
             }
-            
+
             await _context.SaveChangesAsync();
             TempData["success"] = "Advertisement deleted succesfully";
             return RedirectToAction(nameof(Index));
-           
+
         }
 
         private bool AdvertismentExists(int id)
         {
-          return (_context.Advertisments?.Any(e => e.AdId == id)).GetValueOrDefault();
+            return (_context.Advertisments?.Any(e => e.AdId == id)).GetValueOrDefault();
         }
     }
 }

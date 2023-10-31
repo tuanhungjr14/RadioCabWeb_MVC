@@ -24,4 +24,13 @@
     <ProjectReference Include="..\RadioCabs.DataAccess\RadioCab.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Admins\Controllers\" />
+    <Folder Include="Areas\Admins\Views\" />
+    <Folder Include="Areas\Company\Controllers\" />
+    <Folder Include="Areas\Customers\Controllers\" />
+    <Folder Include="Areas\Driver\Controllers\" />
+    <Folder Include="Areas\Driver\Views\" />
+  </ItemGroup>
+
 </Project>
