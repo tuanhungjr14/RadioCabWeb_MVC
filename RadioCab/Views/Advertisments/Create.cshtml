@@ -4,7 +4,7 @@
 
 @* @{
     // Lấy ID của người dùng hiện tại
-    var userId = User.Identity.GetUserId();
+    var userId = User.Identity.Name;
 } *@
 <div class=" card shadow border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient m-lg-0 py-3">
@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="card-body p-4">
-        <form method="post" class="row">
+        <form method="post" class="row" enctype="multipart/form-data">
 
             <div class="border p-3 ">
                 @* <div asp-validation-summary="ModelOnly"></div>*@
@@ -26,11 +26,12 @@
                     <label asp-for="AdTilte" class="ms-2">Title</label>
                     <span asp-validation-for="AdTilte" class="text-danger"></span>
                 </div>
-                <div class="form-floating py-2 col-12">
+                <div class="form-floating py-2 col-12 hidden">
                     <input asp-for="CompanyId" class="form-control border-0 shadow">
-                    <label asp-for="CompanyId" class="ms-2">Company ID</label>
+                     <label asp-for="CompanyId" class="ms-2">Company ID</label>
                     <span asp-validation-for="CompanyId" class="text-danger"></span>
                 </div>
+
                 <div class="form-floating py-2 col-12">
                     <input asp-for="CompanyName" class="form-control border-0 shadow">
                     <label asp-for="CompanyName" class="ms-2">Company Name</label>
@@ -71,12 +72,17 @@
                     <label asp-for="AdDescript" class="ms-2">Description</label>
                     <span asp-validation-for="AdDescript" class="text-danger"></span>
                 </div>
+                @* <div class="form-floating py-2 col-12">
+                    <input type="file" asp-for="ImageUrl" name="ImageUrl" class="form-control border-0 shadow">
+                    <label asp-for="ImageUrl" class="ms-2">ImageUrl</label>
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div> *@
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
                         <button type="submit" class="btn btn-primary form-control">Create</button>
                     </div>
                     <div class="col-6 col-md-3">
-                        <a asp-controller="Advertisment" asp-action="Index" class="btn btn-outline-primary border form-control">
+                        <a asp-controller="Advertisments" asp-action="Index" class="btn btn-outline-primary border form-control">
                             Back to list
                         </a>
                     </div>

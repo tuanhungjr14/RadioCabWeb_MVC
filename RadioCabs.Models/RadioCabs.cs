@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RadioCab.Models
@@ -53,8 +54,8 @@ namespace RadioCab.Models
     {
         [Key]
         public int AdId { get; set; }
-        [ForeignKey("CabCompany")]
-        public int CompanyId { get; set; }
+        [ForeignKey("IdentityUser")]
+        public string CompanyId { get; set; }
         public string AdTilte { get; set; }
         public string CompanyName { get; set; }
         public string Designation { get; set; }
@@ -64,7 +65,8 @@ namespace RadioCab.Models
         public string Fax { get; set; }
         public string Email { get; set; }
         public string AdDescript { get; set; }
-        public string ImageUrl { get; set; }
+        //public string ImageUrl { get; set; }
+        //public IdentityUser<string> IdentityUser { get; set; }
     }
     public class FeedbackType
     {
@@ -147,5 +149,6 @@ namespace RadioCab.Models
 
 
     }
+  
 }
 

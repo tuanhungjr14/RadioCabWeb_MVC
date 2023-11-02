@@ -36,6 +36,7 @@ namespace RadioCab.DataAccess.Data
         public DbSet<DriveOrder> DriveOrders { get; set; }
         public DbSet<AdOrder> AdOrders { get; set; }
         public DbSet<ContactModel> Contact { get; set; }
+        public DbSet<AdvertismentImage> AdvertismentImages { get; set; }
 
 
     }

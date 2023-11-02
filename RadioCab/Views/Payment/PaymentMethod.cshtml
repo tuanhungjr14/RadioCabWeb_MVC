@@ -1,0 +1,60 @@
+﻿@using RadioCabs.Utility;
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Page</title>
+</head>
+<body>
+    <h1>Select Payment Period</h1>
+
+    <div>
+        @if (User.IsInRole(SD.Role_Company))
+        {
+            <p>Company Registration:</p>
+            <p>Monthly Payment: $15</p>
+            <p>Quarterly Payment: $40</p>
+        }
+        else if (User.IsInRole(SD.Role_Driver))
+        {
+            <p>Driver Registration:</p>
+            <p>Monthly Payment: $10</p>
+            <p>Quarterly Payment: $25</p>
+        }
+        <select id="paymentType" onchange="displayAmount()">
+            <option value="Monthly">Monthly</option>
+            <option value="Quarterly">Quarterly</option>
+        </select>
+    </div>
+
+    <div id="amount"></div>
+
+    <button onclick="processPayment()">Pay Now</button>
+
+    <script>
+        function displayAmount() {
+            var paymentType = document.getElementById("paymentType").value;
+            var amount = calculateAmount(paymentType);
+            document.getElementById("amount").innerText = "Amount: $" + amount;
+        }
+
+        function calculateAmount(paymentType) {
+            if ('@User.IsInRole(SD.Role_Company)'.toLowerCase() === 'true') {
+                return paymentType === "Monthly" ? 15 : 40;
+            } else if ('@User.IsInRole(SD.Role_Driver)'.toLowerCase() === 'true') {
+                return paymentType === "Monthly" ? 10 : 25;
+            }
+            return 0; // Default value
+        }
+
+        function processPayment() {
+            var paymentType = document.getElementById("paymentType").value;
+
+            // Implement your logic to process payment here
+            // For instance, make an API call or redirect to a payment gateway
+
+            alert("Payment of $" + calculateAmount(paymentType) + " for " + paymentType + " period processed!");
+        }
+    </script>
+</body>
+</html>

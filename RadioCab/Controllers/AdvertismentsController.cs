@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,14 +13,20 @@ using RadioCab.Models;
 
 namespace RadioCab.Controllers
 {
-    
+    [Authorize(Roles = "Admin, Company")]
     public class AdvertismentsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public AdvertismentsController(ApplicationDbContext context)
+        public AdvertismentsController(ApplicationDbContext context, SignInManager<IdentityUser> signInManager)
         {
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _signInManager = signInManager;
+            if (_context.Advertisments == null)
+            {
+                throw new ArgumentNullException(nameof(_context.Advertisments), "Entity set 'ApplicationDbContext.Advertisments' is null.");
+            }
         }
 
         // GET: Advertisments
@@ -49,7 +58,17 @@ namespace RadioCab.Controllers
         // GET: Advertisments/Create
         public IActionResult Create()
         {
-            return View();
+            string userId = _signInManager.Context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            ViewBag.AllUsers = _context.ApplicationUsers.ToList();
+            var newAdvertisment = new Advertisment
+            {
+                // Các giá trị còn lại của quảng cáo (các thuộc tính khác)
+                // ...
+                CompanyId = userId // Thiết lập ID của người dùng hiện tại cho CompanyId
+            };
+
+            return View(newAdvertisment);
         }
 
         // POST: Advertisments/Create
@@ -57,7 +76,7 @@ namespace RadioCab.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdId,CompanyId,AdTilte,CompanyName,Designation,AdAddress,Mobile,Telephone,Fax,Email,AdDescript")] Advertisment advertisment)
+        public async Task<IActionResult> Create([Bind("AdId,CompanyId,AdTilte,CompanyName,Designation,AdAddress,Mobile,Telephone,Fax,Email,AdDescript,ImageUrl")] Advertisment advertisment)
         {
             if (ModelState.IsValid)
             {
@@ -66,9 +85,9 @@ namespace RadioCab.Controllers
                 TempData["success"] = "Advertisement created successfully";
                 return RedirectToAction(nameof(Index));
             }
-            return View();
-        }
 
+            return View(advertisment);
+        }
 
         // GET: Advertisments/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -91,7 +110,7 @@ namespace RadioCab.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AdId,CompanyId,AdTilte,CompanyName,Designation,AdAddress,Mobile,Telephone,Fax,Email,AdDescript")] Advertisment advertisment)
+        public async Task<IActionResult> Edit(int id, [Bind("AdId,CompanyId,AdTilte,CompanyName,Designation,AdAddress,Mobile,Telephone,Fax,Email,AdDescript,ImageUrl")] Advertisment advertisment)
         {
             if (id != advertisment.AdId)
             {
@@ -165,5 +184,45 @@ namespace RadioCab.Controllers
         {
             return (_context.Advertisments?.Any(e => e.AdId == id)).GetValueOrDefault();
         }
+        public IActionResult Payment()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Payment(string payment) 
+        {
+            //ApplicationUser applicationUser = new ApplicationUser();            
+            ClaimsPrincipal currentUser = _signInManager.Context.User;
+
+            // Retrieve the user ID
+            string userId = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            // Retrieve other user information (if needed)
+            //string userName = currentUser.Identity.Name; // User's name
+            //string userEmail = currentUser.FindFirst(ClaimTypes.Email)?.Value;
+            ApplicationUser applicationUser = await _context.ApplicationUsers.Where(u => u.Id == userId).FirstOrDefaultAsync();
+
+            applicationUser.Payment =payment; 
+
+            if (applicationUser.Payment == "monthly")
+            {
+                ViewData["Price"] = 15;
+            }
+            else if (applicationUser.PAdvertisment == "quarterly")
+            {
+                ViewData["Price"] = 40;
+            }
+            else
+            {
+                ViewData["Price"] = 0;
+            }
+            
+            //_context.Add(applicationUser);
+            await _context.SaveChangesAsync();
+
+            return View("PaymentConfirmation");
+        }
+
     }
 }
