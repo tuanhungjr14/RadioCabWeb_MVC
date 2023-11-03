@@ -90,9 +90,8 @@ namespace RadioCab.Controllers
             ViewBag.AllUsers = _context.ApplicationUsers.ToList();
             var newAdvertisment = new Advertisment
             {
-                // Các giá trị còn lại của quảng cáo (các thuộc tính khác)
-                // ...
-                CompanyId = userId // Thiết lập ID của người dùng hiện tại cho CompanyId
+                
+                CompanyId = userId 
             };
 
             return View(newAdvertisment);
@@ -103,7 +102,7 @@ namespace RadioCab.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AdId,CompanyId,AdTilte,CompanyName,Designation,AdAddress,Mobile,Telephone,Fax,Email,AdDescript,ImageUrl")] Advertisment advertisment)
+        public async Task<IActionResult> Create([Bind("AdId,CompanyId,AdTitle,CompanyName,Designation,AdAddress,Mobile,Telephone,Fax,Email,AdDescript,ImageUrl")] Advertisment advertisment)
         {
             if (ModelState.IsValid)
             {
@@ -137,7 +136,7 @@ namespace RadioCab.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AdId,CompanyId,AdTilte,CompanyName,Designation,AdAddress,Mobile,Telephone,Fax,Email,AdDescript,ImageUrl")] Advertisment advertisment)
+        public async Task<IActionResult> Edit(int id, [Bind("AdId,CompanyId,AdTitle,CompanyName,Designation,AdAddress,Mobile,Telephone,Fax,Email,AdDescript,ImageUrl")] Advertisment advertisment)
         {
             if (id != advertisment.AdId)
             {
@@ -218,27 +217,29 @@ namespace RadioCab.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Payment(string payment)
+        public async Task<IActionResult> Payment(string package)
         {
             ClaimsPrincipal currentUser = _signInManager.Context.User;
             string userId = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             decimal price = 0;
 
-            if (payment == "monthly")
+            if (!string.IsNullOrEmpty(package))
             {
-                price = 15;
-            }
-            else if (payment == "quarterly")
-            {
-                price = 40;
+                if (package == "monthly")
+                {
+                    price = 15;
+                }
+                else if (package == "quarterly")
+                {
+                    price = 40;
+                }
             }
 
-            // Update RolePayment table with the selected price
             var rolePayment = new RolePayment
             {
                 RoleId = userId,
-                PaymentTypeId = GetPaymentTypeId(payment), // Get the PaymentType ID based on the payment type
+                PaymentTypeId = GetPaymentTypeId(package),
                 Price = price
             };
 
@@ -250,23 +251,22 @@ namespace RadioCab.Controllers
             return View("PaymentConfirmation");
         }
 
-        private int GetPaymentTypeId(string payment)
+        private int GetPaymentTypeId(string package)
         {
-            // Method to get PaymentType ID based on the payment type
-            // Replace this logic with your own implementation
-            if (payment == "monthly")
+            if (package == "monthly")
             {
-                return 1; // Replace with the corresponding PaymentType ID for monthly in your database
+                return 1; // Phù hợp với ID PaymentType của monthly trong cơ sở dữ liệu
             }
-            else if (payment == "quarterly")
+            else if (package == "quarterly")
             {
-                return 2; // Replace with the corresponding PaymentType ID for quarterly in your database
+                return 2; // Phù hợp với ID PaymentType của quarterly trong cơ sở dữ liệu
             }
 
-            return 0; // Default or invalid case
+            return 0; // Trường hợp mặc định hoặc không hợp lệ
         }
-
-
-
     }
+
+
+
 }
+
