@@ -7,7 +7,9 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": {
-            url: '/api/users' },
+            url: '/api/users',
+            dataSrc: ''
+        },
         "columns": [
             { "data": "name" },
             { "data": "experience" },
@@ -17,4 +19,3 @@ function loadDataTable() {
         ]
     });
 }
-

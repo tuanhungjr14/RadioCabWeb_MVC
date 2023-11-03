@@ -32,10 +32,37 @@ namespace RadioCab.Controllers
         // GET: Advertisments
         public async Task<IActionResult> Index()
         {
-            return _context.Advertisments != null ?
-                        View(await _context.Advertisments.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.Advertisments'  is null.");
+            var user = _signInManager.Context.User;
+
+            if (user.IsInRole("Admin"))
+            {
+                var allAdvertisements = await _context.Advertisments.ToListAsync();
+                return View(allAdvertisements);
+            }
+            else
+            {
+                string userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+                // Check if the user has a RolePayment entry
+                var rolePayment = await _context.RolePayments
+                    .Where(rp => rp.RoleId == userId)
+                    .FirstOrDefaultAsync();
+
+                if (rolePayment == null || rolePayment.Price == 0)
+                {
+                    return View("Payment"); // Display the payment page if the Price is null or zero
+                }
+                else
+                {
+                    var userAdvertisements = await _context.Advertisments
+                        .Where(a => a.CompanyId == userId)
+                        .ToListAsync();
+                    return View(userAdvertisements); // Show the user's advertisements
+                }
+            }
         }
+
+
 
         // GET: Advertisments/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -189,40 +216,57 @@ namespace RadioCab.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Payment(string payment) 
-        {
-            //ApplicationUser applicationUser = new ApplicationUser();            
-            ClaimsPrincipal currentUser = _signInManager.Context.User;
 
-            // Retrieve the user ID
+        [HttpPost]
+        public async Task<IActionResult> Payment(string payment)
+        {
+            ClaimsPrincipal currentUser = _signInManager.Context.User;
             string userId = currentUser.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            // Retrieve other user information (if needed)
-            //string userName = currentUser.Identity.Name; // User's name
-            //string userEmail = currentUser.FindFirst(ClaimTypes.Email)?.Value;
-            ApplicationUser applicationUser = await _context.ApplicationUsers.Where(u => u.Id == userId).FirstOrDefaultAsync();
+            decimal price = 0;
 
-            applicationUser.Payment =payment; 
+            if (payment == "monthly")
+            {
+                price = 15;
+            }
+            else if (payment == "quarterly")
+            {
+                price = 40;
+            }
 
-            if (applicationUser.Payment == "monthly")
+            // Update RolePayment table with the selected price
+            var rolePayment = new RolePayment
             {
-                ViewData["Price"] = 15;
-            }
-            else if (applicationUser.PAdvertisment == "quarterly")
-            {
-                ViewData["Price"] = 40;
-            }
-            else
-            {
-                ViewData["Price"] = 0;
-            }
-            
-            //_context.Add(applicationUser);
+                RoleId = userId,
+                PaymentTypeId = GetPaymentTypeId(payment), // Get the PaymentType ID based on the payment type
+                Price = price
+            };
+
+            _context.RolePayments.Add(rolePayment);
             await _context.SaveChangesAsync();
+
+            ViewData["Price"] = price;
 
             return View("PaymentConfirmation");
         }
+
+        private int GetPaymentTypeId(string payment)
+        {
+            // Method to get PaymentType ID based on the payment type
+            // Replace this logic with your own implementation
+            if (payment == "monthly")
+            {
+                return 1; // Replace with the corresponding PaymentType ID for monthly in your database
+            }
+            else if (payment == "quarterly")
+            {
+                return 2; // Replace with the corresponding PaymentType ID for quarterly in your database
+            }
+
+            return 0; // Default or invalid case
+        }
+
+
 
     }
 }

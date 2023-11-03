@@ -112,10 +112,7 @@ namespace RadioCab.Areas.Identity.Pages.Account
             public string? Name { get; set; }
             public string? StreetAddress { get; set; }
             public string? City { get; set; }
-            public string? State { get; set; }
-            public string? PostalCode { get; set; }
-            public string? Payment { get; set; }
-            public string? PAdvertisment { get; set; }
+          
         }
 
 
@@ -133,7 +130,7 @@ namespace RadioCab.Areas.Identity.Pages.Account
             Input = new()
             {
                 RoleList = _roleManager.Roles
-            .Where(role => role.Name == SD.Role_Company || role.Name == SD.Role_Driver)
+            .Where(role => role.Name == SD.Role_Company || role.Name == SD.Role_Driver || role.Name == SD.Role_Admin)
             .Select(x => new SelectListItem
             {
                 Text = x.Name,
@@ -158,9 +155,8 @@ namespace RadioCab.Areas.Identity.Pages.Account
                 user.StreetAddress = Input.StreetAddress;
                 user.City = Input.City;
                 user.Name = Input.Name;
-                user.State = Input.State;
-                user.PostalCode = Input.PostalCode;
-                user.Payment = Input.Payment;
+              
+                //user.Payment = Input.Payment;
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)

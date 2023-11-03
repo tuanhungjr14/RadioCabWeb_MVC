@@ -12,8 +12,8 @@ using RadioCab.DataAccess.Data;
 namespace RadioCab.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231031034229_AddContactToDb")]
-    partial class AddContactToDb
+    [Migration("20231103155901_RadioCabsToTable")]
+    partial class RadioCabsToTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -231,56 +231,20 @@ namespace RadioCab.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("RadioCab.Models.AdOrder", b =>
+            modelBuilder.Entity("RadioCab.Models.AdImageUrl", b =>
                 {
-                    b.Property<int>("AorderId")
+                    b.Property<int>("AdImageUrlId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AorderId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdImageUrlId"));
 
-                    b.Property<int>("AdId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
+                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.HasKey("AdImageUrlId");
 
-                    b.HasKey("AorderId");
-
-                    b.ToTable("AdOrders");
-                });
-
-            modelBuilder.Entity("RadioCab.Models.Admin", b =>
-                {
-                    b.Property<int>("AdminId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdminId"));
-
-                    b.Property<string>("AdminEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AdminName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AdminPasss")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AdminType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AdminId");
-
-                    b.ToTable("Admins");
+                    b.ToTable("AdImageUrls");
                 });
 
             modelBuilder.Entity("RadioCab.Models.Advertisment", b =>
@@ -299,12 +263,13 @@ namespace RadioCab.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AdTilte")
+                    b.Property<string>("AdTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
+                    b.Property<string>("CompanyId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
@@ -321,6 +286,9 @@ namespace RadioCab.DataAccess.Migrations
                     b.Property<string>("Fax")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ImageUrlId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Mobile")
                         .IsRequired()
@@ -384,29 +352,6 @@ namespace RadioCab.DataAccess.Migrations
                     b.ToTable("CabCompanies");
                 });
 
-            modelBuilder.Entity("RadioCab.Models.CabOrder", b =>
-                {
-                    b.Property<int>("CorderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CorderId"));
-
-                    b.Property<int>("CabId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.HasKey("CorderId");
-
-                    b.ToTable("CabOrders");
-                });
-
             modelBuilder.Entity("RadioCab.Models.ContactModel", b =>
                 {
                     b.Property<int>("ContactId")
@@ -431,29 +376,6 @@ namespace RadioCab.DataAccess.Migrations
                     b.HasKey("ContactId");
 
                     b.ToTable("Contact");
-                });
-
-            modelBuilder.Entity("RadioCab.Models.DriveOrder", b =>
-                {
-                    b.Property<int>("DorderId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DorderId"));
-
-                    b.Property<int>("DriverId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
-
-                    b.HasKey("DorderId");
-
-                    b.ToTable("DriveOrders");
                 });
 
             modelBuilder.Entity("RadioCab.Models.Driver", b =>
@@ -502,47 +424,6 @@ namespace RadioCab.DataAccess.Migrations
                     b.HasKey("DriverId");
 
                     b.ToTable("Drivers");
-
-                    b.HasData(
-                        new
-                        {
-                            DriverId = 1,
-                            City = "HN",
-                            DriverAddress = "HN",
-                            DriverDescripts = "a",
-                            DriverName = "A",
-                            DriverPass = "1",
-                            Email = "a@gmail.com",
-                            Experience = 100,
-                            Mobile = "123456789",
-                            Telephone = "0284320523"
-                        },
-                        new
-                        {
-                            DriverId = 2,
-                            City = "HN",
-                            DriverAddress = "HN",
-                            DriverDescripts = "a",
-                            DriverName = "B",
-                            DriverPass = "1",
-                            Email = "b@gmail.com",
-                            Experience = 100,
-                            Mobile = "123456788",
-                            Telephone = "0284320524"
-                        },
-                        new
-                        {
-                            DriverId = 3,
-                            City = "HN",
-                            DriverAddress = "HN",
-                            DriverDescripts = "a",
-                            DriverName = "C",
-                            DriverPass = "1",
-                            Email = "c@gmail.com",
-                            Experience = 100,
-                            Mobile = "123456787",
-                            Telephone = "0284320525"
-                        });
                 });
 
             modelBuilder.Entity("RadioCab.Models.Feedback", b =>
@@ -601,24 +482,44 @@ namespace RadioCab.DataAccess.Migrations
                     b.ToTable("FeedbackTypes");
                 });
 
-            modelBuilder.Entity("RadioCab.Models.Pricings", b =>
+            modelBuilder.Entity("RadioCab.Models.PaymentType", b =>
                 {
-                    b.Property<int>("PriceId")
+                    b.Property<int>("PaymentTypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PriceId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentTypeId"));
 
-                    b.Property<string>("Category")
+                    b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
+                    b.HasKey("PaymentTypeId");
+
+                    b.ToTable("PaymentTypes");
+                });
+
+            modelBuilder.Entity("RadioCab.Models.RolePayment", b =>
+                {
+                    b.Property<int>("RolePaymentId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.HasKey("PriceId");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RolePaymentId"));
 
-                    b.ToTable("Pricings");
+                    b.Property<int>("PaymentTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RolePaymentId");
+
+                    b.ToTable("RolePayments");
                 });
 
             modelBuilder.Entity("RadioCab.Models.ApplicationUser", b =>
@@ -628,13 +529,8 @@ namespace RadioCab.DataAccess.Migrations
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Name")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PostalCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StreetAddress")

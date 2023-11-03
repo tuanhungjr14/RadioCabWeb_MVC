@@ -54,13 +54,7 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="MembershipType" class="control-label"></label>
-                <select asp-for="MembershipType" asp-items="Html.GetEnumSelectList<MembershipType>()" class="form-control">
-                    <option value="">-- Select Membership Type --</option>
-                </select>
-                <span asp-validation-for="MembershipType" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

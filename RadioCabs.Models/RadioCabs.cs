@@ -4,76 +4,101 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RadioCab.Models
 {
-    public enum MembershipType
-    {
-        Basic,
-        Premium,
-        Free
-    }
 
-    public class Admin
-    {
-        [Key]
-        public int AdminId { get; set; }
-        public string AdminName { get; set; }
-        public string AdminEmail { get; set; }
-        public string AdminPasss { get; set; }
-
-        public string AdminType { get; set; }
-    }
     public class CabCompany
     {
         [Key]
         public int CompanyId { get; set; }
+
+        [Required(ErrorMessage = "Company Name is required")]
         public string CompanyName { get; set; }
+
         public string ContactPerson { get; set; }
         public string DesignNation { get; set; }
         public string CabAddress { get; set; }
-        public string Mobile { get; set; }
-        public string Telephone { get; set; }
-        public string FaxNumber { get; set; }
-        public string Email { get; set; }
-        public string MembershipType { get; set; }
 
+        [Phone(ErrorMessage = "Invalid Mobile number")]
+        public string Mobile { get; set; }
+
+        [Phone(ErrorMessage = "Invalid Telephone number")]
+        public string Telephone { get; set; }
+
+        public string FaxNumber { get; set; }
+
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+        public string Email { get; set; }
+
+        public string MembershipType { get; set; }
     }
+
     public class Driver
     {
         [Key]
         public int DriverId { get; set; }
+
+        [Required(ErrorMessage = "Driver Name is required")]
         public string DriverName { get; set; }
+
         public string DriverPass { get; set; }
         public string DriverAddress { get; set; }
         public string City { get; set; }
+
+        [Phone(ErrorMessage = "Invalid Mobile number")]
         public string Mobile { get; set; }
+
+        [Phone(ErrorMessage = "Invalid Telephone number")]
         public string Telephone { get; set; }
+
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
+
+        [Range(0, 50, ErrorMessage = "Experience must be between 0 and 50")]
         public int Experience { get; set; }
+
         public string DriverDescripts { get; set; }
     }
+
     public class Advertisment
     {
         [Key]
         public int AdId { get; set; }
+
         [ForeignKey("IdentityUser")]
         public string CompanyId { get; set; }
-        public string AdTilte { get; set; }
+
+        [Required(ErrorMessage = "Advertisement Title is required")]
+        public string AdTitle { get; set; }
+
+        [Required(ErrorMessage = "Company Name is required")]
         public string CompanyName { get; set; }
+
         public string Designation { get; set; }
         public string AdAddress { get; set; }
+
+        [Phone(ErrorMessage = "Invalid Mobile number")]
         public string Mobile { get; set; }
+
+        [Phone(ErrorMessage = "Invalid Telephone number")]
         public string Telephone { get; set; }
+
+        [Phone(ErrorMessage = "Invalid Fax number")]
         public string Fax { get; set; }
+
+        [EmailAddress(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
+
         public string AdDescript { get; set; }
-        //public string ImageUrl { get; set; }
-        //public IdentityUser<string> IdentityUser { get; set; }
+        [ForeignKey("AdImageUrl")]
+        public int ImageUrlId { get; set; }
     }
+
     public class FeedbackType
     {
         [Key]
         public int FeeId { get; set; }
-        public string FeeName { get; set; }
 
+        [Required(ErrorMessage = "Feedback Name is required")]
+        public string FeeName { get; set; }
     }
 
 
@@ -104,51 +129,7 @@ namespace RadioCab.Models
         public string FeedDescript { get; set; }
     }
 
-    public class Pricings
-
-    {
-        [Key]
-        public int PriceId { get; set; }
-        public string Category { get; set; }
-        public int Price { get; set; }
-    }
-    public class CabOrder
-    {
-        [Key]
-        public int CorderId { get; set; }
-        [ForeignKey("CabCompany")]
-        public int CabId { get; set; }
-        [ForeignKey("Pricings")]
-        public int Price { get; set; }
-        public string PaymentMethod { get; set; }
-
-
-    }
-    public class DriveOrder
-    {
-        [Key]
-        public int DorderId { get; set; }
-        [ForeignKey("Driver")]
-        public int DriverId { get; set; }
-        [ForeignKey("Pricings")]
-        public int Price { get; set; }
-        public string PaymentMethod { get; set; }
-
-
-    }
-    public class AdOrder
-    {
-        [Key]
-
-        public int AorderId { get; set; }
-        [ForeignKey("Advertisment")]
-        public int AdId { get; set; }
-        [ForeignKey("Pricings")]
-        public int Price { get; set; }
-        public string PaymentMethod { get; set; }
-
-
-    }
+    
   
 }
 

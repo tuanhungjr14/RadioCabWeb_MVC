@@ -62,11 +62,6 @@
 
            
 
-            <div class="form-floating mb-3">
-                <input asp-for="CInput.MembershipType" class="form-control" placeholder="Please enter your membership type." />
-                <label asp-for="CInput.MembershipType" class="form-label"></label>
-                <span asp-validation-for="CInput.MembershipType" class="text-danger"></span>
-                </div>
             } 
             @if (User.IsInRole(SD.Role_Driver)){
             <div class="form-floating mb-3">

@@ -36,9 +36,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MembershipType)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -64,14 +62,12 @@
                 @Html.DisplayFor(modelItem => item.Telephone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FaxNumber)
+                    @Html.DisplayFor(modelItem => item.FaxNumber)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MembershipType)
-            </td>
+            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.CompanyId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.CompanyId">Details</a> |

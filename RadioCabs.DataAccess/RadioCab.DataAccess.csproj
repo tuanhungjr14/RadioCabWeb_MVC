@@ -21,4 +21,8 @@
     <ProjectReference Include="..\RadioCabs.Utility\RadioCab.Utility.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
