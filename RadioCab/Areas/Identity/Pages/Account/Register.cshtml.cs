@@ -130,7 +130,7 @@ namespace RadioCab.Areas.Identity.Pages.Account
             Input = new()
             {
                 RoleList = _roleManager.Roles
-            .Where(role => role.Name == SD.Role_Company || role.Name == SD.Role_Driver || role.Name == SD.Role_Admin)
+            .Where(role => role.Name == SD.Role_Company || role.Name == SD.Role_Driver )
             .Select(x => new SelectListItem
             {
                 Text = x.Name,
@@ -148,6 +148,12 @@ namespace RadioCab.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                if (string.IsNullOrEmpty(Input.Role))
+                {
+                    ModelState.AddModelError(string.Empty, "Please select a role (Company or Driver) to register.");
+                   
+                    return Page();
+                }
                 var user = CreateUser();
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
@@ -199,7 +205,7 @@ namespace RadioCab.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            
             return Page();
         }
 

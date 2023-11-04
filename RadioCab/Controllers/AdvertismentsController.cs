@@ -13,7 +13,7 @@ using RadioCab.Models;
 
 namespace RadioCab.Controllers
 {
-    [Authorize(Roles = "Admin, Company")]
+    
     public class AdvertismentsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -28,7 +28,7 @@ namespace RadioCab.Controllers
                 throw new ArgumentNullException(nameof(_context.Advertisments), "Entity set 'ApplicationDbContext.Advertisments' is null.");
             }
         }
-
+        [Authorize(Roles = "Admin, Company")]
         // GET: Advertisments
         public async Task<IActionResult> Index()
         {
@@ -61,6 +61,13 @@ namespace RadioCab.Controllers
                 }
             }
         }
+
+        public async Task<IActionResult> ViewAd()
+        {
+            var allAdvertisements = await _context.Advertisments.ToListAsync();
+            return View(allAdvertisements);
+        }
+
 
 
 
