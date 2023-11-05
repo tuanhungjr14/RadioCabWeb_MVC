@@ -4,34 +4,61 @@
     ViewData["Title"] = "ViewAd";
 }
 
+@{
+    var adList = Model.ToList();
+    int adsCount = adList.Count;
+    int numberOfColumns = 3;
+    int numberOfRows = (int)Math.Ceiling((double)adsCount / numberOfColumns);
+}
 
+<div class="mb-3">
+    <input type="text" id="searchInput" onkeyup="filterAds()" placeholder="Search for advertisement..." class="form-control">
+</div>
 
-@foreach (var item in Model)
+@for (int i = 0; i < numberOfRows; i++)
 {
-    <div class="col-lg-3 col-sm-6">
-        <div class="row p-2">
-            <div class="col-12 p-1">
-                <div class="card border-0 p-3 shadow  border-top border-5 rounded">
-                   
-
-                    <div class="card-body pb-0">
-                        <div class="pl-1">
-                            <p class="card-title h5 text-dark opacity-75 text-uppercase text-center"> @Html.DisplayFor(modelItem => item.AdTitle)</p>
-                            <p class="card-title text-warning text-center">by <b> @Html.DisplayFor(modelItem => item.CompanyName)</b></p>
+    <div class="row">
+        @for (int j = i * numberOfColumns; j < Math.Min((i + 1) * numberOfColumns, adsCount); j++)
+        {
+            var item = adList[j];
+            <div class="col-lg-4 col-sm-6 ad-card">
+                <div class="row p-2">
+                    <div class="col-12 p-1">
+                        <div class="card border-0 p-3 shadow border-top border-5 rounded">
+                            <div class="card-body pb-0">
+                                <div class="pl-1">
+                                    <p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@Html.DisplayFor(modelItem => item.AdTitle)</p>
+                                    <p class="card-title text-warning text-center">by <b>@Html.DisplayFor(modelItem => item.CompanyName)</b></p>
+                                </div>
+                            </div>
+                            <div>
+                                <a asp-action="Details" asp-route-id="@item.AdId" class="btn btn-primary bg-gradient border-0 form-control">Details</a>
+                            </div>
                         </div>
-                        
-                    </div>
-                    <div>
-                        <a asp-action="Details"
-                           asp-route-productId="@* @product.Id *@"
-                           class="btn btn-primary bg-gradient border-0 form-control">
-                            Details
-                        </a>
                     </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
 }
 
+@section Scripts{
+    <script>
+        function filterAds() {
+            var input, filter, adCards, cardTitle, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            adCards = document.getElementsByClassName('ad-card');
 
+            for (var i = 0; i < adCards.length; i++) {
+                cardTitle = adCards[i].getElementsByTagName('p')[0];
+                txtValue = cardTitle.textContent || cardTitle.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    adCards[i].style.display = "";
+                } else {
+                    adCards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+}

@@ -68,6 +68,22 @@ namespace RadioCab.Controllers
             return View(allAdvertisements);
         }
 
+        // GET: Advertisments/Details/5
+        public async Task<IActionResult >DetailsAd(int? id)
+        {
+        if (id == null || _context.Advertisments == null)
+        {
+        return NotFound();
+        }
+
+        var advertisment = await _context.Advertisments.FirstOrDefaultAsync(m => m.AdId == id);
+        if (advertisment == null)
+        {
+        return NotFound();
+         }
+
+        return View(advertisment);
+        }
 
 
 
@@ -262,14 +278,14 @@ namespace RadioCab.Controllers
         {
             if (package == "monthly")
             {
-                return 1; // Phù hợp với ID PaymentType của monthly trong cơ sở dữ liệu
+                return 1; 
             }
             else if (package == "quarterly")
             {
-                return 2; // Phù hợp với ID PaymentType của quarterly trong cơ sở dữ liệu
+                return 2; 
             }
 
-            return 0; // Trường hợp mặc định hoặc không hợp lệ
+            return 0; 
         }
     }
 
